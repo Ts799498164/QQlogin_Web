@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>QQ登录页面</title>
+	<link rel="stylesheet" href="css/style_add.css" type="text/css">
+</head>
+<body>
+	<div class="mainbody" id="mainbody">
+		<div class="logo" id="logo"></div>
+		<div class="hidelogo">
+			<img src="./image/boxy_btn.png" alt="">
+		</div>
+		<div class="sub">
+			<form action="addAction.php" method="POST" id="formtable" target="_self">
+				<label for="username">账 号:</label>
+				<input type="text" checked="check" name="username" id="username" placeholder="QQ号码或Email账号"><br />
+				<label for="password">密 码:</label>
+				<input type="password" checked="check" name="password" id="password">
+				<input type="submit" value="" class="button">
+			</form>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	window.onload=function(){
+	var hide = document.getElementsByClassName("hidelogo")[0];
+	var main = document.getElementsByClassName("mainbody")[0];
+	hide.onclick=function(){
+		main.style.display="none";
+	}
+
+	var mainbody=document.getElementById("mainbody");
+	var logo=document.getElementById("logo");
+	var flag=true;
+	logo.onmousedown=function(event){
+		flag=true;
+		var sX=event.clientX;
+		var sY=event.clientY;
+		var nX=mainbody.offsetLeft;
+		var nY=mainbody.offsetTop;
+		document.onmousemove=function(event){
+			if(flag){
+			var X=event.clientX;
+			var Y=event.clientY;
+			var nX1=X-sX+nX;
+		    var nY1=Y-sY+nY;
+		    //获取浏览器宽度
+		    if (window.innerWidth)
+			winWidth = window.innerWidth;
+			else if ((document.body) && (document.body.clientWidth))
+			winWidth = document.body.clientWidth;
+			//获取元素宽度
+			bodyWidth=mainbody.offsetWidth;
+		    // console.log(mainbody.offsetWidth);
+		    //获取浏览器高度
+		    if (window.innerHeight)
+			winHeight = window.innerHeight;
+			else if ((document.body) && (document.body.clientHeight))
+			winHeight = document.body.clientHeight;
+			//获取元素高度
+			bodyHeight=mainbody.offsetHeight;
+			if(nX1<0){
+				mainbody.style.left=2+"px";
+			}else if(nX1>winWidth-bodyWidth){
+				mainbody.style.left=winWidth-bodyWidth-8+"px";
+			}else{
+				mainbody.style.left=nX1+"px";
+			}
+			if(nY1<0){
+				mainbody.style.top=6+"px";
+			}else if(nY1>winHeight-bodyHeight){
+				mainbody.style.bottom=6+"px";
+			}else{
+				mainbody.style.top=nY1+"px";
+			}
+		}
+		};
+	}
+	logo.onmouseup=function(){
+		flag=false;
+	}
+}
+</script>
+</html>
