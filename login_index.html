@@ -18,28 +18,29 @@
 				<label for="password">密 码:</label>
 				<input type="password" checked="check" name="password" id="password">
 				<input type="submit" value="" class="button">
-				<div class="status">
+
+				<div class="status" id="status">
 				  <div class="on">
-					<div class="icon"></div><div class="smallIcon"></div><div class="textArea" id="textArea">在线</div>
+					<img src="image/1.png" id="Icon"><img src="image/9.png" id="smallIcon" style="margin-left: 5px;"><div class="textArea" id="textArea">在线</div>
 				  </div>	
-					<div class="hideArea">
+					<div class="hideArea" id="hideArea">
 						<div class="line">
-						<div class="icon1"></div><div class="textArea1">我在线上</div>
+						<img src="image/1.png"><div class="textArea">我在线上</div>
 						</div>
 						<div class="line">
-						<div class="icon2"></div><div class="textArea2">Q我吧</div>&nbsp;
+						<img src="image/5.png"><div class="textArea">Q我吧</div>&nbsp;
 						</div>
 						<div class="line">
-						<div class="icon3"></div><div class="textArea3">离开</div>&nbsp;&nbsp;
+						<img src="image/2.png"><div class="textArea">离开</div>&nbsp;&nbsp;
 						</div>
 						<div class="line">
-						<div class="icon4"></div><div class="textArea4">忙碌</div>&nbsp;&nbsp;
+						<img src="image/3.png"><div class="textArea">忙碌</div>&nbsp;&nbsp;
 						</div>
 						<div class="line">
-						<div class="icon5"></div><div class="textArea5">请勿打扰</div>&nbsp;
+						<img src="image/7.png"><div class="textArea">请勿打扰</div>&nbsp;
 						</div>
 						<div class="line">
-						<div class="icon6"></div><div class="textArea6">隐身</div>&nbsp;&nbsp;
+						<img src="image/4.png"><div class="textArea">隐身</div>&nbsp;&nbsp;
 						</div>
 					</div>
 				</div>
@@ -57,36 +58,42 @@
 	hide.onclick=function(){
 		main.style.display="none";
 	}
-	var status = document.getElementsByClassName("status")[0];
-	var hiden = document.getElementsByClassName("hideArea")[0];
-	var line = document.getElementsByClassName("line");
+/*状态栏的效果*/
+	var status = document.getElementById("status");
+	var hiden = document.getElementById("hideArea");
+	var lines = document.getElementsByClassName("line");
 	var textArea = document.getElementById("textArea");
+	var smallIcon = document.getElementById("smallIcon");
+	var Icon = document.getElementById("Icon");
+
 	status.onclick=function(event){
 		event=event||window.event;
 		event.stopPropagation();
 		hiden.style.display="block";
+		smallIcon.src="image/8.png";
 	}
 	window.onclick=function(){
 		hiden.style.display="none";
+		smallIcon.src="image/9.png";
 	}
-	for(var i=0;i<line.length;i++){
-		line[i].index=i;
-		line[i].onmouseover=function(){
+	for(var i=0 , j=lines.length;i<j;i++){
+		lines[i].onmouseover=function(){
 			this.style.background="#CCC";
 		}
-		line[i].onmouseout=function(){
+		lines[i].onmouseout=function(){
 			this.style.background="#FFF";
 		}
-		line[i].onclick=function(event){
-			//console.log(this.index);
+		lines[i].onclick=function(event){
 			event.stopPropagation();
-			var demo = this.getElementsByTagName("div");
-			var tex=demo[1].innerHTML;
-			var bac=demo[0];
-			textArea.innerHTML=tex;//icon的改变
+			var icon = this.getElementsByTagName("img")[0];
+			var divText = this.getElementsByTagName("div")[0];
+			Icon.src = icon.src;
+			textArea.innerHTML = divText.innerHTML;
 			hiden.style.display="none";	
+			smallIcon.src="image/9.png";
 		}
 	}
+/*拖拽效果的实现*/
 	var mainbody=document.getElementById("mainbody");
 	var logo=document.getElementById("logo");
 	var flag=true;
@@ -138,6 +145,5 @@
 		flag=false;
 	}
 }
-
 </script>
 </html>
