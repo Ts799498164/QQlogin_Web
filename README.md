@@ -1,9 +1,10 @@
 # QQlogin_Web
-QQ login page.
-<p></p>
-The registration page is as follows:
-![Image text](https://github.com/Ts799498164/image-folder/blob/master/qqregister.png)
-The landing page is as follows
+## 网页版QQ登录页面
+### 登录页面如下所示：
 ![Image text](https://github.com/Ts799498164/image-folder/blob/master/qqlogin.png)
-<p>It can achieve full screen normal drag and drop.</p>
-Also includes some of the database and the database related operations, through the PHP to achieve.
+### 同时添加了注册页面完善功能，页面如下所示：
+![Image text](https://github.com/Ts799498164/image-folder/blob/master/qqregister.png)
+### 在页面制作完成后，添加了一个拖动事件，在拖动区，mousedown事件监听实现登录框随鼠标坐标（clientX,clientY）动态移动，同时在该事件内部添加mouseup来取消拖动。但是后来的测试过程中发现页面存在两处bug：  
+#### 第一个是在拖动的过程中，登录框或注册框或溢出视口，也就是浏览器出现了滑动狂，而框的一部分被移动到看不到的地方。解决方法为没mousemove过程中获取登录框页面的位置，如果要溢出了，那就硬性设置其position属性。通过这种方法很好的解决了这个问题。    
+#### 第二个时拖动时，鼠标点下在拖动区拖动后快速松开会发生粘连的情况，也就是登录框对随着没有点击的鼠标到处跑。解决方法为通过使用鼠标事件的事件对象的which属性，在which为1（即表示鼠标左键按下）时发生拖动。很好地解决了问题。   
+### 我也把和服务器交互的php文件也上传到该仓库中，把网页挂到服务器上可以实现用户登录验证、用户注册、用户信息更改、用户删除等交互。
